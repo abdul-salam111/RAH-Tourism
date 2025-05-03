@@ -8,6 +8,7 @@ import 'package:bookdubaisafari/app/modules/cartmodule/cart/controllers/cart_con
 import 'package:bookdubaisafari/app/repositories/bookingRepo.dart';
 import 'package:bookdubaisafari/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -169,9 +170,8 @@ class BookingconfirmationController extends GetxController {
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         body: body,
         headers: {
-          'Authorization':
-              'Bearer sk_test_51QnmYU08H8aRsG1XLP3DmUhzWjfKHvqnVxqUnwGxzgxTj0NywniT4zQQAnD8q1Yrkf1ZofraIUBaIGV7jnOZt0lR00y4cVAaYc',
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET_KEY']}',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
       );
 
