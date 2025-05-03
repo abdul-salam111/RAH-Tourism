@@ -4,23 +4,41 @@ import 'package:bookdubaisafari/app/utils/translations/translations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Load environment variables
+  await dotenv.load(fileName: ".env");
+
+  // Initialize local storage
   await GetStorage.init();
-  // Stripe.publishableKey =
-  //     "pk_test_51QnmYU08H8aRsG1XeET3GK2YC8P4D4oOWADoyzyKLkzoQtFuxo8Nch1TILmTsBAuPkM3c6ZecKyporqMhqyNlt1R00i4J7scRM";
+
+  // Set Stripe publishable key from .env
+  Stripe.publishableKey = dotenv.env['STRIPE_API_KEY'] ?? '';
+
+  // Apply Stripe settings
   await Stripe.instance.applySettings();
+
+  // Lock orientation to portrait and run the app
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then((_) {
     runApp(const MyApp());
   });
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
