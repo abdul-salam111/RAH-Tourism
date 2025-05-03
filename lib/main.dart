@@ -12,8 +12,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  Stripe.publishableKey =
-      "pk_test_51QnmYU08H8aRsG1XeET3GK2YC8P4D4oOWADoyzyKLkzoQtFuxo8Nch1TILmTsBAuPkM3c6ZecKyporqMhqyNlt1R00i4J7scRM";
+  // Stripe.publishableKey =
+  //     "pk_test_51QnmYU08H8aRsG1XeET3GK2YC8P4D4oOWADoyzyKLkzoQtFuxo8Nch1TILmTsBAuPkM3c6ZecKyporqMhqyNlt1R00i4J7scRM";
   await Stripe.instance.applySettings();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
